@@ -16,6 +16,47 @@ html {
     clear: both;
 }
 
-.container{
-    
+.container {
+    background-image: url("../images/sw-bg.jpg");
+    background-repeat: no-repeat;
 }
+
+.row {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.col {
+    border: 1px dashed red;
+    width: 40%;
+}
+
+.char-select {
+    height: 240px;
+}
+
+.char-container {
+    width: 530px;
+    height: auto;
+    background-color: black;
+    padding: 10px 10px;
+}
+
+.chars-thumb {
+    width: 80px;
+    height: 160px;
+    margin: 0 3px;
+}
+
+.player-select {
+    height: 160px;
+}
+
+.fight-arena {
+    height: 340px;
+}
+
+.battle-activity {
+    height: 315px;
+}
+
