@@ -37,7 +37,7 @@ html {
 }
 
 .char-container {
-    width: 490px;
+    width: 505px;
     height: auto;
     background-color: black;
     padding: 10px 10px;
@@ -48,6 +48,10 @@ html {
     width: 60px;
     height: 160px;
     margin: 0 3px;
+}
+
+.chars-thumb:hover {
+    border: 2px solid greenyellow;
 }
 
 .player-select {
@@ -62,3 +66,6 @@ html {
     height: 315px;
 }
 
+#yoda-thumb {
+    margin-right: 0;
+}
