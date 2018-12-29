@@ -17,6 +17,7 @@ html {
 }
 
 .container {
+    height: auto;
     background-image: url("../images/sw-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;    /* cover the full screen with the image */
@@ -81,10 +82,6 @@ html {
     text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
 }
 
-.fight-arena {
-    
-}
-
 .matchupBox {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
@@ -92,7 +89,6 @@ html {
     background-color: black;
     padding: 10px 10px;
     margin: 20px;
-    
 }
 
 .matchupBox img {
@@ -137,13 +133,33 @@ html {
     margin: 0 auto;
 }
 
-.battle-activity {
+.battle-activity-label {
+    margin: 10px 0 0px 20px;
+    width: 280px;
+    padding: 5px;
+    color:white;
+    font-size: 26px;
+    letter-spacing: 5px;
+    font-style: italic;
+}
+
+.battle-console {
     height: 315px;
+    width: 670px;
+    background-color: black;
+    color: white;
+    padding: 20px 20px;
+    margin: 0 0 20px 20px;
+    border-radius: 15px 15px 15px 15px;
+    line-height: 1.5em;
 }
 
-#yoda-thumb {
-    margin-right: 0;
+.p1Attack {
+    color: greenyellow;
 }
 
+.cpuCounterAttack {
+    color: red;
+}
 
 
