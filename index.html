@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css"/>
-    <link href="http://allfont.net/allfont.css?fonts=star-jedi" rel="stylesheet" type="text/css" />
+    <link href="http://allfont.net/allfont.css?fonts=star-jedi&effects=three-dimensional-float" rel="stylesheet" type="text/css" />
     <title>RPG - Star Wars</title>
 </head>
 <body>
@@ -30,12 +30,18 @@
         </div>
         <div class="row">
             <div class="col player-select">
-
+                <button type="button" id="bttn-p1" class="bttn-player-select">Player 1</button>
+                <button type="button" id="bttn-cpu" class="bttn-player-select">CPU</button>
             </div>
         </div>
         <div class="row">
             <div class="col fight-arena">
-
+                <div class="matchupBox">
+                    <img id="p1Matchup" class="matchupChar" src="assets/images/luke.jpg" alt="luke skywalker">
+                    <div class="vsBox">VS</div>
+                    <div class="attackBox">Attack</div>
+                    <img id="cpuMatchup" class="matchupChar" src="assets/images/vader.jpg" alt="Darth Vader">
+                </div>
             </div>
         </div>
         <div class="row">
