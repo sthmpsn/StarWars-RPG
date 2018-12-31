@@ -25,7 +25,6 @@ html {
 
 .row {
     border: 1px solid black;
-    width: 100%;
 }
 
 .col {
@@ -33,12 +32,29 @@ html {
     width: 550px;
 }
 
+.charLogoRow {
+    display: grid;
+    grid-template-columns: 550px 1fr 1fr 1fr 1fr .45fr;
+}
+
 .char-select {
-    height: auto;
+
+}
+
+.logo-box {
+    grid-column: 5;
+    margin: auto;
+}
+
+.starWarsLogo {
+        width: 250px;
+        /* height: 20%; */
+
 }
 
 .char-container {
-    width: 465px;
+    /* width: 465px; */
+    grid-column: 1 ;
     height: auto;
     background-color: black;
     padding: 10px 10px;
@@ -58,6 +74,7 @@ html {
 .chars-thumb-cpu:hover {
     border: 2px solid red;
 }
+
 
 .player-select {
     height: 80px;
