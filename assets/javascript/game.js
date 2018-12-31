@@ -81,7 +81,7 @@ $(document).ready(function(){
         300,
         3,
         10,
-        'Menotoring young Jedi and wisdom' ,
+        'Mentoring young Jedi and wisdom' ,
         'Linguistically constructing sentences in "object-subject-verb"'
     )
 
@@ -89,6 +89,7 @@ $(document).ready(function(){
 
     // Defining Variables
     var availableFighters = [kyloRen, lukeSkywalker, darthMaul, quigon, stormTrooper, darthVader, yoda];
+    var currentCharSelected = "";
     var p1 = "";
     var cpu = "";
 
@@ -103,7 +104,7 @@ $(document).ready(function(){
     function loadFighters(){
         availableFighters.forEach(function(fighter) {
             console.log(fighter);
-            $charContainerEl.append('<img class="chars-thumb" src="assets/images/' + fighter.imageName + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
+            $charContainerEl.append('<img class="chars-thumb" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
         });
     }
 
@@ -116,6 +117,7 @@ $(document).ready(function(){
         else{
             charObj.attr("class", 'chars-thumb chars-thumb-cpu-selected');
         }
+        currentCharSelected = charObj.attr("value");
     }
 
 
@@ -131,8 +133,8 @@ $(document).ready(function(){
         selectPlayer($(this));
     });
 
-    $('.chars-thumb').click(function(){
-        selectPlayer($(this));
+    $('#bttn-p1').click(function(){
+        console.log(currentCharSelected);
     });
 
 
