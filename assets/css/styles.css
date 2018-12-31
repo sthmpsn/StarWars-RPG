@@ -18,6 +18,7 @@ html {
 
 .container {
     height: auto;
+    min-width: 1714px;
     background-image: url("../images/sw-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;    /* cover the full screen with the image */
@@ -44,6 +45,7 @@ html {
 .logo-box {
     grid-column: 5;
     margin: auto;
+
 }
 
 .starWarsLogo {
@@ -117,6 +119,25 @@ html {
     grid-column: 1;
     grid-row: 1;
     margin: 0 auto;
+}
+
+#p1HpBox {
+    color: greenyellow;
+    grid-column: 2;
+    grid-row: 2;
+    margin: auto;
+}
+
+#cpuHpBox {
+    color: red;
+    grid-column: 4;
+    grid-row: 2;
+    margin: auto;
+}
+
+.hpItem {
+    padding: 8px 0;
+    font-size: 32px;
 }
 
 .vsBox {
