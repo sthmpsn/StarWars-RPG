@@ -94,7 +94,7 @@ $(document).ready(function(){
 
 
     // Get Elements in the DOM
-    var $charContainerEl = $("#char-container");
+    var $charContainerEl = $('#char-container');
 
 
 
@@ -107,7 +107,33 @@ $(document).ready(function(){
         });
     }
 
-loadFighters();
+    function selectPlayer(charObj){
+        console.log(charObj);
+        $('.chars-thumb').attr("class", 'chars-thumb');
+        if (p1 === ""){    
+            charObj.attr("class", 'chars-thumb chars-thumb-p1-selected');
+            }
+        else{
+            charObj.attr("class", 'chars-thumb chars-thumb-cpu-selected');
+        }
+    }
+
+
+// Load Game Environment
+    loadFighters();
+
+
+
+
+// Listening to Click Events 
+
+    $('.chars-thumb').click(function(){
+        selectPlayer($(this));
+    });
+
+    $('.chars-thumb').click(function(){
+        selectPlayer($(this));
+    });
 
 
 

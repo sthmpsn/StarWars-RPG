@@ -198,4 +198,12 @@ html {
     color: red;
 }
 
+/* InterActivity Styles - Invoked by JavaScript */
 
+.chars-thumb-p1-selected {
+    border: 2px solid greenyellow;
+}
+
+.chars-thumb-cpu-selected {
+    border: 2px solid red;
+}
