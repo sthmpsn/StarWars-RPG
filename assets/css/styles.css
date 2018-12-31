@@ -29,38 +29,24 @@ html {
 }
 
 .col {
-    border: 1px dashed red;
+    border: 1px dashed blue;
     width: 550px;
 }
 
 .charLogoRow {
     display: grid;
-    grid-template-columns: 550px 1fr 1fr 1fr 1fr .45fr;
+    grid-template-columns: auto 1fr 1fr 1fr 1fr .45fr;
 }
 
-.char-select {
-
-}
-
-.logo-box {
-    grid-column: 5;
-    margin: auto;
-
-}
-
-.starWarsLogo {
-        width: 250px;
-        /* height: 20%; */
-
+.char-area {
+    max-width: 720px;
 }
 
 .char-container {
-    /* width: 465px; */
-    grid-column: 1 ;
-    height: auto;
+    grid-column: 1;
     background-color: black;
     padding: 10px 10px;
-    margin: 20px 40px;
+    margin: 20px;
 }
 
 .chars-thumb {
@@ -77,6 +63,17 @@ html {
     border: 2px solid red;
 }
 
+.logo-box {
+    grid-column: 5;
+    margin: auto;
+
+}
+
+.starWarsLogo {
+        width: 250px;
+        /* height: 20%; */
+
+}
 
 .player-select {
     height: 80px;
@@ -176,7 +173,7 @@ html {
     width: 280px;
     padding: 5px;
     color:white;
-    font-size: 26px;
+    font-size: 28px;
     letter-spacing: 5px;
     font-style: italic;
 }
@@ -184,6 +181,7 @@ html {
 .battle-console {
     height: 315px;
     width: 670px;
+    font-size: 22px;
     background-color: black;
     color: white;
     padding: 20px 20px;
