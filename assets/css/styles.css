@@ -55,7 +55,7 @@ html {
     margin: 0 5px;
 }
 
-.chars-thumb:hover {
+.chars-thumb-p1:hover {
     border: 2px solid greenyellow;
 }
 
@@ -196,12 +196,17 @@ html {
 
 /* InterActivity Styles - Invoked by JavaScript */
 
-#char-thumb-p1-selected {
+#p1-charSelected {
     border: 2px solid greenyellow;
     filter: grayscale(100%);
 }
 
-.chars-thumb-p1-chosen {
+#cpu-charSelected {
+    border: 2px solid red;
+    filter: grayscale(100%);
+}
+
+.chars-thumb-p1-clicked {
     border: 2px solid greenyellow;
 }
 
@@ -209,6 +214,6 @@ html {
     border: 2px solid red;
 }
 
-.chars-thumb-cpu-selected {
+.chars-thumb-cpu-clicked {
     border: 2px solid red;
 }

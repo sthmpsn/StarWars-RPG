@@ -105,7 +105,7 @@ $(document).ready(function(){
     function loadFighters(){
         availableFighters.forEach(function(fighter) {
             console.log(fighter);
-            $charContainerEl.append('<img class="chars-thumb" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
+            $charContainerEl.append('<img class="chars-thumb chars-thumb-p1" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
         });
     }
 
@@ -113,10 +113,11 @@ $(document).ready(function(){
         console.log(charObj);
         $('.chars-thumb').attr("class", 'chars-thumb');
         if (p1 === ""){    
-            charObj.attr("class", 'chars-thumb chars-thumb-p1-chosen');
+            charObj.attr("class", 'chars-thumb chars-thumb-p1-clicked');
             }
         else{
-            charObj.attr("class", 'chars-thumb chars-thumb-cpu-selected');
+            charObj.attr("class", 'chars-thumb chars-thumb-cpu-clicked');
+            // charObj.attr("id", 'chars-thumb chars-thumb-cpu-selected');
         }
         charSelectedImg = charObj;
         charSelectedVal = charSelectedImg.attr("value");
@@ -149,8 +150,8 @@ $(document).ready(function(){
         p1 = findPlayerInArray(charSelectedVal);
         console.log('Player 1: ' + p1.name);
         $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu');
-        charSelectedImg.attr("class", 'chars-thumb');
-        charSelectedImg.attr("id", 'char-thumb-p1-selected');
+        charSelectedImg.attr("class", 'chars-thumb charSelected');
+        charSelectedImg.attr("id", 'p1-charSelected');
         $('#bttn-p1').hide();
         $('#bttn-cpu').show();  // need to decide if only want to show one button at time
     });
