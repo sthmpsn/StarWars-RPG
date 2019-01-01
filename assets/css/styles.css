@@ -59,10 +59,6 @@ html {
     border: 2px solid greenyellow;
 }
 
-.chars-thumb-cpu:hover {
-    border: 2px solid red;
-}
-
 .logo-box {
     grid-column: 5;
     margin: auto;
@@ -200,8 +196,17 @@ html {
 
 /* InterActivity Styles - Invoked by JavaScript */
 
-.chars-thumb-p1-selected {
+#char-thumb-p1-selected {
     border: 2px solid greenyellow;
+    filter: grayscale(100%);
+}
+
+.chars-thumb-p1-chosen {
+    border: 2px solid greenyellow;
+}
+
+.chars-thumb-cpu:hover {
+    border: 2px solid red;
 }
 
 .chars-thumb-cpu-selected {

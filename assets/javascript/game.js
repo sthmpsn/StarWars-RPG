@@ -89,7 +89,8 @@ $(document).ready(function(){
 
     // Defining Variables
     var availableFighters = [kyloRen, lukeSkywalker, darthMaul, quigon, stormTrooper, darthVader, yoda];
-    var currentCharSelected = "";
+    var charSelectedImg = "";
+    var charSelectedVal = "";
     var p1 = "";
     var cpu = "";
 
@@ -112,12 +113,22 @@ $(document).ready(function(){
         console.log(charObj);
         $('.chars-thumb').attr("class", 'chars-thumb');
         if (p1 === ""){    
-            charObj.attr("class", 'chars-thumb chars-thumb-p1-selected');
+            charObj.attr("class", 'chars-thumb chars-thumb-p1-chosen');
             }
         else{
             charObj.attr("class", 'chars-thumb chars-thumb-cpu-selected');
         }
-        currentCharSelected = charObj.attr("value");
+        charSelectedImg = charObj;
+        charSelectedVal = charSelectedImg.attr("value");
+    }
+
+    function findPlayerInArray(playerSelected){
+        for (var i = 0; i < availableFighters.length; i++){
+            if (availableFighters[i].name === playerSelected){
+                var player = availableFighters[i];
+            }
+        }
+        return player;
     }
 
 
@@ -134,9 +145,21 @@ $(document).ready(function(){
     });
 
     $('#bttn-p1').click(function(){
-        console.log(currentCharSelected);
+        console.log('Current Selected: ' + charSelectedVal);
+        p1 = findPlayerInArray(charSelectedVal);
+        console.log('Player 1: ' + p1.name);
+        $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu');
+        charSelectedImg.attr("class", 'chars-thumb');
+        charSelectedImg.attr("id", 'char-thumb-p1-selected');
+        $('#bttn-p1').hide();
     });
 
+    $('#bttn-cpu').click(function(){
+        console.log('Current Selected: ' + charSelectedVal);
+        cpu = findPlayerInArray(charSelectedVal);
+        console.log('CPU: ' + cpu.name);
+
+    });
 
 
 
