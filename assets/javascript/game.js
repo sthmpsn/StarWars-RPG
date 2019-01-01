@@ -152,6 +152,7 @@ $(document).ready(function(){
         charSelectedImg.attr("class", 'chars-thumb');
         charSelectedImg.attr("id", 'char-thumb-p1-selected');
         $('#bttn-p1').hide();
+        $('#bttn-cpu').show();
     });
 
     $('#bttn-cpu').click(function(){
