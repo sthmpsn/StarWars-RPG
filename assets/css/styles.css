@@ -49,6 +49,13 @@ html {
     margin: 20px;
 }
 
+.char-container-used {
+    grid-column: 2;
+    background-color: black;
+    padding: 10px 10px;
+    margin: 20px;
+}
+
 .chars-thumb {
     width: 50px;
     height: 140px;
@@ -67,20 +74,20 @@ html {
 
 .starWarsLogo {
         width: 250px;
-        /* height: 20%; */
-
 }
 
-.player-select {
-    height: 80px;
+.player-select-row {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr 1fr .45fr;
 }
 
 .bttn-player-select {
+    grid-column: 2;
     width: 180px;
     height: 75px;
     background-color: black;
     border-radius: 15px;
-    margin-left: 55px;
+    margin: auto;
     font-size: 28px;
     letter-spacing: 5px;
     font-style: italic;
@@ -198,12 +205,11 @@ html {
 
 #p1-charSelected {
     border: 2px solid greenyellow;
-    filter: grayscale(100%);
 }
 
-#cpu-charSelected {
-    border: 2px solid red;
-    filter: grayscale(100%);
+.cpu-charSelected {
+    /* border: 2px solid red; */
+    filter: grayscale(100%) !important;
 }
 
 .chars-thumb-p1-clicked {
@@ -216,4 +222,15 @@ html {
 
 .chars-thumb-cpu-clicked {
     border: 2px solid red;
+}
+
+.warning {
+    width: 500px;
+    margin: 10px 20px;
+    padding: 5px 0;
+    border-radius: 15px;
+    background-color: lightyellow;
+    font-size: 36px;
+    text-align: center;
+    white-space: pre;
 }
