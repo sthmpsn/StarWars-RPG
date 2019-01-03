@@ -182,14 +182,14 @@ $(document).ready(function(){
             cpu.hp = cpu.hp - p1NewAP;
             p1NewAP += p1.ap;
             console.log("P1 AP increased to " + p1NewAP," CPU HP after attack " + cpu.hp);
-            $('#battle-console').append('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>attacked <span class="cpuName">' + cpu.name + ' </span>for ' + p1NewAP + ' damage</span><br>');
+            $('#battle-console').prepend('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>attacked <span class="cpuName">' + cpu.name + ' </span>for ' + p1NewAP + ' damage</span><br>');
             $cpuHpEl.text(cpu.hp);
         }
         else if (charObj === cpu){
             console.log("CPU CAP Start " + cpu.cap," Player HP before counter attack " + p1.hp);            
             p1.hp -= cpu.cap;
             console.log("CPU CAP Stayed at " + cpu.cap," Player HP after attack " + p1.hp);
-            $('#battle-console').append('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked </span><span class="p1Name">' + p1.name + ' </span>for ' + cpu.cap + ' damage</span><br>');
+            $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked </span><span class="p1Name">' + p1.name + ' </span>for ' + cpu.cap + ' damage</span><br>');
             $p1HpEl.text(p1.hp);
         }
     }
@@ -234,7 +234,7 @@ $(document).ready(function(){
 
         $('#bttn-p1').hide();
         $('#bttn-cpu').show();  // need to decide if only want to show one button at time
-        $('#battle-console').append('<span class="attackActivity">Player 1 Chose <span class="p1Name">' + p1.name + ' </span></span><br>');
+        $('#battle-console').prepend('<span class="attackActivity">Player 1 Chose <span class="p1Name">' + p1.name + ' </span></span><br>');
 
     });
 
@@ -252,7 +252,7 @@ $(document).ready(function(){
         });
         $cpuHpEl.text(cpu.hp);
         $('#bttn-cpu').hide();
-        $('#battle-console').append('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>is your opponent</span><br>');
+        $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>is your opponent</span><br>');
 
     });
 
