@@ -167,14 +167,21 @@ $(document).ready(function(){
         return player;
     }
 
-    // function battleAction(charObj){
-    //     var $newSpan = "";
-    //     if (charObj === p1.name){
-    //         $('#battle-console').html("<span class="p1Attack"></span>");
+    function battleAction(charObj){
+        // p1 attack cpu for p1.ap value
+        // subtract cpu hp by p1.ap value
+        // cpu attack p1 by cpu.cap value
+        // subtract p1 hp by cpu.cap value (counter attack points)
+        // p1 gains current AP + original AttackPoint (apNew += p1.ap per attack (experienced gained)  p1.ap * p1.ap
 
-    //     }
-
-    // }
+        if (charObj === p1){
+            $('#battle-console').append('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>attacked </span><span class="cpuName">' + cpu.name + '</span><br>');
+        
+        }
+        else if (charObj === cpu){
+            $('#battle-console').append('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked </span><span class="p1Name">' + p1.name + '</span><br>');
+        }
+    }
 
 
 
@@ -215,7 +222,7 @@ $(document).ready(function(){
 
         $('#bttn-p1').hide();
         $('#bttn-cpu').show();  // need to decide if only want to show one button at time
-        $('#battle-console').append('<span class="p1Attack">Player 1 Chose <span class="playerName">' + p1.name + ' </span></span><br>');
+        $('#battle-console').append('<span class="attackActivity">Player 1 Chose <span class="p1Name">' + p1.name + ' </span></span><br>');
 
     });
 
@@ -233,20 +240,13 @@ $(document).ready(function(){
         });
         $cpuHpEl.text(cpu.hp);
         $('#bttn-cpu').hide();
-        $('#battle-console').append('<span class="cpuCounterAttack"><span class="playerName">' + cpu.name + ' </span>is your opponent</span><br>');
+        $('#battle-console').append('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>is your opponent</span><br>');
 
     });
 
     $(document).on("click", '#attackBttn', function(){
-        // p1 attack cpu for p1.ap value
-        // subtract cpu hp by p1.ap value
-        // cpu attack p1 by cpu.cap value
-        // subtract p1 hp by cpu.cap value (counter attack points)
-        // p1 gains current AP + original AttackPoint (apNew += p1.ap per attack (experienced gained)  p1.ap * p1.ap
-        
-
-        
-
+        battleAction(p1);
+        battleAction(cpu); 
 
     });
 

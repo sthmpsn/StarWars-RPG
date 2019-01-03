@@ -78,7 +78,7 @@ html {
 }
 
 .starWarsLogo {
-        width: 250px;
+    width: 250px;
 }
 
 .player-select-row {
@@ -196,14 +196,6 @@ html {
     line-height: 1.5em;
 }
 
-.p1Attack {
-    color: greenyellow;
-}
-
-.cpuCounterAttack {
-    color: red;
-}
-
 /* InterActivity Styles - Invoked by JavaScript */
 
 #p1-charSelected {
@@ -241,6 +233,14 @@ html {
     white-space: pre;
 }
 
-.playerName {
+.p1Name {
+    color: greenyellow;
+}
+
+.cpuName {
+    color: red;
+}
+
+.attackActivity {
     color: yellow;
 }
