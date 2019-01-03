@@ -245,3 +245,7 @@ html {
 .attackActivity {
     color: yellow;
 }
+
+.damage {
+    color: orange;
+}
