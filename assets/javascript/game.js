@@ -222,6 +222,7 @@ $(document).ready(function(){
     loadAvailFighters();
     $charContainerUsedEl.hide();
     $('#bttn-cpu').hide();
+    $('#bttn-replay').hide();
     $('#shipsBox').hide();
 
 
@@ -292,6 +293,12 @@ $(document).ready(function(){
             battleAction(cpu); 
         }
     });
+
+    // Reload/Restart page when Game Over
+    $('#bttn-replay').click(function(){
+        location.reload();
+    });
+
 
 
 });    // Close document.ready statement

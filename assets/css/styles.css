@@ -110,6 +110,10 @@ html {
     text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
 }
 
+#bttn-replay {
+    text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
+}
+
 .matchupBox {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
