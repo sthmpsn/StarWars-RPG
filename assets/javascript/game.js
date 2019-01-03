@@ -100,8 +100,8 @@ $(document).ready(function(){
     var $charContainerEl = $('#char-container');
     var $charContainerUsedEl = $('#char-container-used');
     var $playerSelectEl = $('#player-select-warn');
-    var $matchupBoxEl = $('#matchupBox');
-
+    var $p1MatchupEl = $('#p1Matchup');
+    var $cpuMatchupEl = $('#cpuMatchup');
 
     // Game Activities
 
@@ -194,7 +194,7 @@ $(document).ready(function(){
         $charContainerUsedEl.show();
 
         //load to the matchup area
-        $matchupBoxEl.html('<img id="p1-Matchup" class="matchupChar" src="assets/images/' + p1.imageName + '>');
+        $p1MatchupEl.attr("src",'assets/images/' + p1.imageName  );
 
         $('#bttn-p1').hide();
         $('#bttn-cpu').show();  // need to decide if only want to show one button at time
@@ -208,6 +208,7 @@ $(document).ready(function(){
         loadAvailFighters();
         loadUsedFighters();
         $('.chars-thumb').attr("class", 'chars-thumb');  // switch hover to red since CPU select turn
+        $cpuMatchupEl.attr("src",'assets/images/' + cpu.imageName  );
         $('#bttn-cpu').hide();
     });
 
