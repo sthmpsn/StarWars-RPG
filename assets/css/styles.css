@@ -167,17 +167,15 @@ html {
     font-style: italic;
 }
 
-.attackBox {
+#attackBox {
     grid-column: 3;
     grid-row: 2;
     border-radius: 50%;
     margin: 10px 0;
-    padding-top: 38px;
     background-color: red;
     color: white;
     text-align: center;
     font-size: 1.3em;
-
 }
 
 #cpuMatchup {
