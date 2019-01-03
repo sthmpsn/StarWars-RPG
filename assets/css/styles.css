@@ -215,7 +215,12 @@ html {
     border: 2px solid greenyellow;
 }
 
-.cpu-charSelected {
+#cpu-charSelected {
+    /* border: 2px solid red; */
+    filter: grayscale(100%) !important;
+}
+
+.cpu-defeated {
     /* border: 2px solid red; */
     filter: grayscale(100%) !important;
 }

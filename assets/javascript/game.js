@@ -91,7 +91,6 @@ $(document).ready(function(){
     var availableFighters = [kyloRen, lukeSkywalker, darthMaul, quigon, stormTrooper, darthVader, yoda];
     var usedFighters = [];
     var p1SelectedVal = "";
-    var charSelectedImg = "";
     var cpuSelectedVal = "";
     var p1 = "";
     var cpu = "";
@@ -118,6 +117,8 @@ $(document).ready(function(){
         $charContainerUsedEl.text('');
         usedFighters.forEach(function(fighter) {
             console.log(fighter);
+            // If fighter.name === p1.name  THEN make ID = #p1-charSelected  ELSE #cpu-charSelected
+
             $charContainerUsedEl.append('<img class="chars-thumb-used" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
         });
     }
@@ -158,7 +159,7 @@ $(document).ready(function(){
 
 // Load Game Environment
     loadAvailFighters();
-    // $charContainerUsedEl.hide();
+    $charContainerUsedEl.hide();
     $('#bttn-cpu').hide();
 
 
@@ -182,6 +183,7 @@ $(document).ready(function(){
         console.log('Player 1: ' + p1.name);
         loadAvailFighters();
         loadUsedFighters();
+        $charContainerUsedEl.show();
         $('#bttn-p1').hide();
         $('#bttn-cpu').show();  // need to decide if only want to show one button at time
     });
