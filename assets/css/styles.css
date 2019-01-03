@@ -62,6 +62,14 @@ html {
     margin: 0 5px;
 }
 
+.chars-thumb-used {
+    width: 50px;
+    height: 140px;
+    margin: 0 5px;
+    filter: grayscale(100%);
+}
+
+
 .chars-thumb-p1:hover {
     border: 2px solid greenyellow;
 }

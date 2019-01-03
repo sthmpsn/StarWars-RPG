@@ -90,8 +90,9 @@ $(document).ready(function(){
     // Defining Variables
     var availableFighters = [kyloRen, lukeSkywalker, darthMaul, quigon, stormTrooper, darthVader, yoda];
     var usedFighters = [];
+    var p1SelectedVal = "";
     var charSelectedImg = "";
-    var charSelectedVal = "";
+    var cpuSelectedVal = "";
     var p1 = "";
     var cpu = "";
 
@@ -104,45 +105,46 @@ $(document).ready(function(){
 
     // Game Activities
 
-    function loadFighters(){
+    function loadAvailFighters(){
         $charContainerEl.text('');
         availableFighters.forEach(function(fighter) {
             console.log(fighter);
             $charContainerEl.append('<img class="chars-thumb chars-thumb-p1" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
 
         });
+    }
+
+    function loadUsedFighters(){
+        $charContainerUsedEl.text('');
         usedFighters.forEach(function(fighter) {
             console.log(fighter);
-            $charContainerUsedEl.append('<img class="chars-thumb" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
+            $charContainerUsedEl.append('<img class="chars-thumb-used" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
         });
     }
 
     function selectPlayer(charObj){
         console.log(charObj);
-        charSelectedImg = charObj;
-        charSelectedVal = charSelectedImg.attr("value");
-        
         $('.chars-thumb').attr("class", 'chars-thumb');
 
-
         if (p1 === ""){    
-            charSelectedImg.attr("class", 'chars-thumb chars-thumb-p1-clicked');
+            charObj.attr("class", 'chars-thumb chars-thumb-p1-clicked');
+            p1SelectedVal = charObj.attr("value");
+            console.log("p1SelectedVal: " + p1SelectedVal);
         }
         else{
             if (cpu === ""){
-                charSelectedImg.attr("class", 'chars-thumb chars-thumb-cpu-clicked');
+                charObj.attr("class", 'chars-thumb chars-thumb-cpu-clicked');
+                cpuSelectedVal = charObj.attr("value");
+                console.log("cpuSelectedVal: " + cpuSelectedVal);
+            }
 
-            }
-            else{
-                $playerSelectEl.text('Battle already in progress\n Complete the battle first');
-                $playerSelectEl.attr("class",'warning');
-            }
         }
+
     }
 
-    function moveCharToUsedArray(playerSelected){
+    function moveCharToUsedArray(charSelected){
         for (var i = 0; i < availableFighters.length; i++){
-            if (availableFighters[i].name === playerSelected){
+            if (availableFighters[i].name === charSelected){
                 usedFighters.push(availableFighters[i]);
                 var player = usedFighters[(usedFighters.length -1)];
                 availableFighters.splice(i,1);   
@@ -155,7 +157,7 @@ $(document).ready(function(){
 
 
 // Load Game Environment
-    loadFighters();
+    loadAvailFighters();
     // $charContainerUsedEl.hide();
     $('#bttn-cpu').hide();
 
@@ -163,31 +165,37 @@ $(document).ready(function(){
 
 // Listening to Click Events 
 
-    $('.chars-thumb').click(function(){
-        selectPlayer($(this));
+    $(document).on("click", '.chars-thumb', function(){
+        if (p1 === "" || cpu === ""){
+            selectPlayer($(this));
+        }
+        else{
+            $playerSelectEl.text('Battle already in progress\n Complete the battle first');
+            $playerSelectEl.attr("class",'warning');
+        }
     });
-
-    $('#bttn-p1').click(function(){
-        p1 = moveCharToUsedArray(charSelectedVal);
+    
+    $(document).on("click", '#bttn-p1', function(){
+        console.log("Player Button was clicked");
+        p1 = moveCharToUsedArray(p1SelectedVal);
         $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu'); // switch hover to red since CPU select turn
         console.log('Player 1: ' + p1.name);
-        charSelectedImg.hide();
+        loadAvailFighters();
+        loadUsedFighters();
         $('#bttn-p1').hide();
         $('#bttn-cpu').show();  // need to decide if only want to show one button at time
-
     });
 
-    $('#bttn-cpu').click(function(){
-        cpu = moveCharToUsedArray(charSelectedVal);
-        loadFighters();
-        $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu');  // switch hover to red since CPU select turn
-        console.log('Current Selected: ' + charSelectedVal);
+    $(document).on("click", '#bttn-cpu', function(){
+        console.log("CPU Button was clicked");
+        cpu = moveCharToUsedArray(cpuSelectedVal);
+        // $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu');  // switch hover to red since CPU select turn
+        console.log('Current Selected: ' + cpuSelectedVal);
         console.log('CPU: ' + cpu.name);
+        loadAvailFighters();
+        loadUsedFighters();
         $('#bttn-cpu').hide();
     });
-
-
-
 
 
 });    // Close document.ready statement
