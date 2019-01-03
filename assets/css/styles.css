@@ -62,11 +62,6 @@ html {
     margin: 0 5px;
 }
 
-.chars-thumb-defeated {
-    filter: grayscale(100%);
-}
-
-
 .chars-thumb-p1:hover {
     border: 2px solid greenyellow;
 }
@@ -218,6 +213,9 @@ html {
 
 .cpu-defeated {
     filter: grayscale(100%);
+    width: 50px;
+    height: 140px;
+    margin: 0 5px;
 }
 
 .chars-thumb-p1-clicked {

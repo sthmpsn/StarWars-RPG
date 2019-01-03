@@ -11,7 +11,7 @@ $(document).ready(function(){
         this.strength = strength;       // description info
         this.weakness = weakness;      // description info 
         this.isSelected = false;      // set to true if P1 or CPU fighter
-        this.isAttacked = false;      // if true will trigger a CounterAttack
+        this.isDefeated = false;      // if true will trigger a CounterAttack
     }
 
     // Creating Actual Fighters
@@ -127,10 +127,15 @@ $(document).ready(function(){
                 $charContainerUsedEl.append('<img id="p1-charSelected" class="chars-thumb" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
             }
             else if (fighter.name === cpu.name){
-                $charContainerUsedEl.append('<img id="cpu-charSelected" class="chars-thumb" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
+                if (cpu.isDefeated !== true){
+                    $charContainerUsedEl.append('<img id="cpu-charSelected" class="chars-thumb" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
+                }
+                else{
+                    $charContainerUsedEl.append('<img id="cpu-charSelected" class="chars-thumb cpu-defeated" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
+                }
             }
             else {
-                $charContainerUsedEl.append('<img class="chars-thumb cpu-defeated" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
+                $charContainerUsedEl.append('<img class="cpu-defeated" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
             }
         });
     }
@@ -167,36 +172,49 @@ $(document).ready(function(){
     }
 
     function battleAction(charObj){
-        // p1 attack cpu for p1.ap value
-        // subtract cpu hp by p1.ap value
-        // cpu attack p1 by cpu.cap value
-        // subtract p1 hp by cpu.cap value (counter attack points)
-        // p1 gains current AP + original AttackPoint (apNew += p1.ap per attack (experienced gained)  p1.ap * p1.ap
-
-        
-
         if (charObj === p1){
             console.log("P1 AP Start " + p1NewAP," CPU HP before attack " + cpu.hp);            
             cpu.hp = cpu.hp - p1NewAP;
             p1NewAP += p1.ap;
             console.log("P1 AP increased to " + p1NewAP," CPU HP after attack " + cpu.hp);
-            $('#battle-console').prepend('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>attacked <span class="cpuName">' + cpu.name + ' </span>for </span><span class="damage">' + p1NewAP + ' damage</span><br>');
-            $cpuHpEl.text(cpu.hp);
-        }
-        else if (charObj === cpu){
-            
-            console.log("CPU CAP Start " + cpu.cap," Player HP before counter attack " + p1.hp);            
-            p1.hp -= cpu.cap;
-            console.log("CPU CAP Stayed at " + cpu.cap," Player HP after attack " + p1.hp);
-            if (charObj.name === "Storm Trooper"){
-                $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>missed their blaster shot counter attack at <span class="p1Name">' + p1.name + ' </span>for </span><span class="damage">' + cpu.cap + ' damage</span><br>');
+            if (cpu.hp > 0){
+                $cpuHpEl.text(cpu.hp);
+                $('#battle-console').prepend('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>attacked <span class="cpuName">' + cpu.name + ' </span>for </span><span class="damage">' + p1NewAP + ' damage</span><br>');
             }
             else{
-                $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked <span class="p1Name">' + p1.name + ' </span>for </span><span class="damage">' + cpu.cap + ' damage</span><br>');
+                //defeated
+                cpu.isDefeated = true;
+                $cpuHpEl.text(' X');
+                $('#battle-console').prepend('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>DEFEATED <span class="cpuName">' + cpu.name + ' </span><br>');
             }
-            $p1HpEl.text(p1.hp);
+
+        }
+        else if (charObj === cpu){
+            if (!(cpu.isDefeated)){
+                console.log("CPU CAP Start " + cpu.cap," Player HP before counter attack " + p1.hp);            
+                p1.hp -= cpu.cap;
+                console.log("CPU CAP Stayed at " + cpu.cap," Player HP after attack " + p1.hp);
+                if (charObj.name === "Storm Trooper"){
+                    $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>missed their blaster shot counter attack at <span class="p1Name">' + p1.name + ' </span>for </span><span class="damage">' + cpu.cap + ' damage</span><br>');
+                }
+                else{
+                    $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked <span class="p1Name">' + p1.name + ' </span>for </span><span class="damage">' + cpu.cap + ' damage</span><br>');
+                }
+                $p1HpEl.text(p1.hp);
+            }
+            else{
+                //defeated
+                $('#bttn-cpu').show();  //to select a new opponent
+                $('#shipsBox').hide();
+                $('#cpu-charSelected, #cpuMatchup').attr("class",'cpu-defeated');
+                cpu = "";
+                loadUsedFighters();
+                loadAvailFighters();
+                $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu'); // switch hover to red since CPU select turn
+            }
         }
     }
+
 
 
 
@@ -224,6 +242,7 @@ $(document).ready(function(){
         console.log("Player Button was clicked");
         if ($('.chars-thumb-p1-clicked')[0] && p1 === ""){
             p1 = moveCharToUsedArray(p1SelectedVal);
+            p1.isSelected = true;
             p1NewAP = p1.ap;
 
             console.log('Player 1: ' + p1.name);
@@ -248,6 +267,7 @@ $(document).ready(function(){
     $(document).on("click", '#bttn-cpu', function(){
         console.log("CPU Button was clicked");
         cpu = moveCharToUsedArray(cpuSelectedVal);
+        cpu.isSelected = true;   //use for later logic after defeated
         console.log('Current Selected: ' + cpuSelectedVal);
         console.log('CPU: ' + cpu.name);
         loadAvailFighters();
@@ -260,6 +280,7 @@ $(document).ready(function(){
         $cpuHpEl.text(cpu.hp);
         $('#bttn-cpu').hide();
         $('#shipsBox').show();
+        $cpuMatchupEl.attr("class",'');  //clear grayscale if applied
         $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>is your opponent</span><br>');
 
     });
