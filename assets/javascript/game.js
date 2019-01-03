@@ -94,6 +94,7 @@ $(document).ready(function(){
     var cpuSelectedVal = "";
     var p1 = "";
     var cpu = "";
+    var p1NewAP = 0;  // holder for accumulative p1 AP  (XP gained)
 
 
     // Get Elements in the DOM
@@ -104,7 +105,7 @@ $(document).ready(function(){
     var $cpuMatchupEl = $('#cpuMatchup');
     var $p1HpEl = $('#p1Hp');
     var $cpuHpEl = $('#cpuHp');
-    var $attackBttnEl = $('#attackBttn');
+
 
     // Game Activities
 
@@ -174,12 +175,22 @@ $(document).ready(function(){
         // subtract p1 hp by cpu.cap value (counter attack points)
         // p1 gains current AP + original AttackPoint (apNew += p1.ap per attack (experienced gained)  p1.ap * p1.ap
 
-        if (charObj === p1){
-            $('#battle-console').append('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>attacked </span><span class="cpuName">' + cpu.name + '</span><br>');
         
+
+        if (charObj === p1){
+            console.log("P1 AP Start " + p1NewAP," CPU HP before attack " + cpu.hp);            
+            cpu.hp = cpu.hp - p1NewAP;
+            p1NewAP += p1.ap;
+            console.log("P1 AP increased to " + p1NewAP," CPU HP after attack " + cpu.hp);
+            $('#battle-console').append('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>attacked <span class="cpuName">' + cpu.name + ' </span>for ' + p1NewAP + ' damage</span><br>');
+            $cpuHpEl.text(cpu.hp);
         }
         else if (charObj === cpu){
-            $('#battle-console').append('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked </span><span class="p1Name">' + p1.name + '</span><br>');
+            console.log("CPU CAP Start " + cpu.cap," Player HP before counter attack " + p1.hp);            
+            p1.hp -= cpu.cap;
+            console.log("CPU CAP Stayed at " + cpu.cap," Player HP after attack " + p1.hp);
+            $('#battle-console').append('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked </span><span class="p1Name">' + p1.name + ' </span>for ' + cpu.cap + ' damage</span><br>');
+            $p1HpEl.text(p1.hp);
         }
     }
 
@@ -207,6 +218,7 @@ $(document).ready(function(){
     $(document).on("click", '#bttn-p1', function(){
         console.log("Player Button was clicked");
         p1 = moveCharToUsedArray(p1SelectedVal);
+        p1NewAP = p1.ap;
         $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu'); // switch hover to red since CPU select turn
         console.log('Player 1: ' + p1.name);
         loadAvailFighters();
