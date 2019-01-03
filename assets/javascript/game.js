@@ -184,10 +184,16 @@ $(document).ready(function(){
             $cpuHpEl.text(cpu.hp);
         }
         else if (charObj === cpu){
+            
             console.log("CPU CAP Start " + cpu.cap," Player HP before counter attack " + p1.hp);            
             p1.hp -= cpu.cap;
             console.log("CPU CAP Stayed at " + cpu.cap," Player HP after attack " + p1.hp);
-            $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked <span class="p1Name">' + p1.name + ' </span>for </span><span class="damage">' + cpu.cap + ' damage</span><br>');
+            if (charObj.name === "Storm Trooper"){
+                $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>missed their blaster shot counter attack at <span class="p1Name">' + p1.name + ' </span>for </span><span class="damage">' + cpu.cap + ' damage</span><br>');
+            }
+            else{
+                $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked <span class="p1Name">' + p1.name + ' </span>for </span><span class="damage">' + cpu.cap + ' damage</span><br>');
+            }
             $p1HpEl.text(p1.hp);
         }
     }
@@ -257,9 +263,10 @@ $(document).ready(function(){
     });
 
     $(document).on("click", '#attackBttn', function(){
-        battleAction(p1);
-        battleAction(cpu); 
-
+        if (!(p1 === "" || cpu === "")){
+            battleAction(p1);
+            battleAction(cpu); 
+        }
     });
 
 
