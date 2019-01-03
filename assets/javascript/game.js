@@ -194,7 +194,10 @@ $(document).ready(function(){
         $charContainerUsedEl.show();
 
         //load to the matchup area
-        $p1MatchupEl.attr("src",'assets/images/' + p1.imageName  );
+        $p1MatchupEl.attr({
+            "src": 'assets/images/' + p1.imageName,
+            "alt": p1.name  
+        });
 
         $('#bttn-p1').hide();
         $('#bttn-cpu').show();  // need to decide if only want to show one button at time
@@ -208,7 +211,10 @@ $(document).ready(function(){
         loadAvailFighters();
         loadUsedFighters();
         $('.chars-thumb').attr("class", 'chars-thumb');  // switch hover to red since CPU select turn
-        $cpuMatchupEl.attr("src",'assets/images/' + cpu.imageName  );
+        $cpuMatchupEl.attr({
+            "src": 'assets/images/' + cpu.imageName,
+            "alt": cpu.name
+        });
         $('#bttn-cpu').hide();
     });
 
