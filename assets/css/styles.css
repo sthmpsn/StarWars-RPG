@@ -167,7 +167,7 @@ html {
     font-style: italic;
 }
 
-#attackBox {
+#attackBttn {
     grid-column: 3;
     grid-row: 2;
     border-radius: 50%;

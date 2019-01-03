@@ -104,7 +104,7 @@ $(document).ready(function(){
     var $cpuMatchupEl = $('#cpuMatchup');
     var $p1HpEl = $('#p1Hp');
     var $cpuHpEl = $('#cpuHp');
-    var $attackBoxEl = $('#attackBox');
+    var $attackBttnEl = $('#attackBttn');
 
     // Game Activities
 
@@ -222,10 +222,10 @@ $(document).ready(function(){
         $('#bttn-cpu').hide();
     });
 
-    // $(document).on("click", '#attackBox', function(){
-    //     $attackBoxEl = "";
+    $(document).on("click", '#attackBttn', function(){
+        $attackBoxEl = "";
 
-    // }
+    }
 
 
 });    // Close document.ready statement
