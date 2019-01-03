@@ -189,11 +189,11 @@ $(document).ready(function(){
     $(document).on("click", '#bttn-cpu', function(){
         console.log("CPU Button was clicked");
         cpu = moveCharToUsedArray(cpuSelectedVal);
-        // $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu');  // switch hover to red since CPU select turn
         console.log('Current Selected: ' + cpuSelectedVal);
         console.log('CPU: ' + cpu.name);
         loadAvailFighters();
         loadUsedFighters();
+        $('.chars-thumb').attr("class", 'chars-thumb');  // switch hover to red since CPU select turn
         $('#bttn-cpu').hide();
     });
 
