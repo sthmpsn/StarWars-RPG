@@ -167,6 +167,16 @@ $(document).ready(function(){
         return player;
     }
 
+    // function battleAction(charObj){
+    //     var $newSpan = "";
+    //     if (charObj === p1.name){
+    //         $('#battle-console').html("<span class="p1Attack"></span>");
+
+    //     }
+
+    // }
+
+
 
 // Load Game Environment
     loadAvailFighters();
@@ -202,8 +212,11 @@ $(document).ready(function(){
             "alt": p1.name  
         });
         $p1HpEl.text(p1.hp);
+
         $('#bttn-p1').hide();
         $('#bttn-cpu').show();  // need to decide if only want to show one button at time
+        $('#battle-console').append('<span class="p1Attack">Player 1 Chose <span class="playerName">' + p1.name + ' </span></span><br>');
+
     });
 
     $(document).on("click", '#bttn-cpu', function(){
@@ -220,12 +233,22 @@ $(document).ready(function(){
         });
         $cpuHpEl.text(cpu.hp);
         $('#bttn-cpu').hide();
+        $('#battle-console').append('<span class="cpuCounterAttack"><span class="playerName">' + cpu.name + ' </span>is your opponent</span><br>');
+
     });
 
     $(document).on("click", '#attackBttn', function(){
-        $attackBoxEl = "";
+        // p1 attack cpu for p1.ap value
+        // subtract cpu hp by p1.ap value
+        // cpu attack p1 by cpu.cap value
+        // subtract p1 hp by cpu.cap value (counter attack points)
+        // p1 gains current AP + original AttackPoint (apNew += p1.ap per attack (experienced gained)  p1.ap * p1.ap
+        
 
-    }
+        
+
+
+    });
 
 
 });    // Close document.ready statement

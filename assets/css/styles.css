@@ -49,13 +49,6 @@ html {
     margin: 20px;
 }
 
-/* .char-container-used-box {
-    grid-column: 2;
-    padding: 10px 10px;
-    margin: 20px;
-    background-color: black;
-} */
-
 .char-container-used {
     background-color: black;
     grid-column: 2;
@@ -70,9 +63,6 @@ html {
 }
 
 .chars-thumb-defeated {
-    /* width: 50px;
-    height: 140px;
-    margin: 0 5px; */
     filter: grayscale(100%);
 }
 
@@ -194,7 +184,7 @@ html {
     font-style: italic;
 }
 
-.battle-console {
+#battle-console {
     height: 315px;
     width: 670px;
     font-size: 22px;
@@ -249,4 +239,8 @@ html {
     font-size: 36px;
     text-align: center;
     white-space: pre;
+}
+
+.playerName {
+    color: yellow;
 }
