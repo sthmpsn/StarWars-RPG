@@ -35,7 +35,7 @@ html {
 
 .charLogoRow {
     display: grid;
-    grid-template-columns: auto 1fr 1fr 1fr 1fr .45fr;
+    grid-template-columns: auto auto 1fr 1fr 1fr .45fr;
 }
 
 .char-area {
@@ -49,9 +49,16 @@ html {
     margin: 20px;
 }
 
-.char-container-used {
+/* .char-container-used-box {
     grid-column: 2;
+    padding: 10px 10px;
+    margin: 20px;
     background-color: black;
+} */
+
+.char-container-used {
+    background-color: black;
+    grid-column: 2;
     padding: 10px 10px;
     margin: 20px;
 }

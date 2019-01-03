@@ -102,6 +102,8 @@ $(document).ready(function(){
     var $playerSelectEl = $('#player-select-warn');
     var $p1MatchupEl = $('#p1Matchup');
     var $cpuMatchupEl = $('#cpuMatchup');
+    var $p1HpEl = $('#p1Hp');
+    var $cpuHpEl = $('#cpuHp');
 
     // Game Activities
 
@@ -198,6 +200,7 @@ $(document).ready(function(){
             "src": 'assets/images/' + p1.imageName,
             "alt": p1.name  
         });
+        $p1HpEl.text(p1.hp);
 
         $('#bttn-p1').hide();
         $('#bttn-cpu').show();  // need to decide if only want to show one button at time
@@ -215,6 +218,9 @@ $(document).ready(function(){
             "src": 'assets/images/' + cpu.imageName,
             "alt": cpu.name
         });
+        $cpuHpEl.text(cpu.hp);
+
+
         $('#bttn-cpu').hide();
     });
 
