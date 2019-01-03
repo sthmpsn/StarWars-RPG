@@ -35,7 +35,7 @@ html {
 
 .charLogoRow {
     display: grid;
-    grid-template-columns: auto auto 1fr 1fr 1fr .45fr;
+    grid-template-columns: auto auto 1fr 2fr 1fr .45fr;
 }
 
 .char-area {
@@ -78,7 +78,7 @@ html {
 }
 
 .starWarsLogo {
-    width: 250px;
+    width: 200px;
 }
 
 .player-select-row {
@@ -96,6 +96,15 @@ html {
     font-size: 28px;
     letter-spacing: 5px;
     font-style: italic;
+}
+
+#shipsBox {
+    grid-column: 1 / 2;
+    background-color: black;
+}
+
+.ships {
+    height: 75px;
 }
 
 #bttn-p1 {

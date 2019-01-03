@@ -204,6 +204,7 @@ $(document).ready(function(){
     loadAvailFighters();
     $charContainerUsedEl.hide();
     $('#bttn-cpu').hide();
+    $('#shipsBox').hide();
 
 
 
@@ -258,11 +259,13 @@ $(document).ready(function(){
         });
         $cpuHpEl.text(cpu.hp);
         $('#bttn-cpu').hide();
+        $('#shipsBox').show();
         $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>is your opponent</span><br>');
 
     });
 
     $(document).on("click", '#attackBttn', function(){
+        $playerSelectEl.hide();
         if (!(p1 === "" || cpu === "")){
             battleAction(p1);
             battleAction(cpu); 
