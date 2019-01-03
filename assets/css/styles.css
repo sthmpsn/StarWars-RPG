@@ -62,10 +62,10 @@ html {
     margin: 0 5px;
 }
 
-.chars-thumb-used {
-    width: 50px;
+.chars-thumb-defeated {
+    /* width: 50px;
     height: 140px;
-    margin: 0 5px;
+    margin: 0 5px; */
     filter: grayscale(100%);
 }
 
@@ -216,13 +216,11 @@ html {
 }
 
 #cpu-charSelected {
-    /* border: 2px solid red; */
-    filter: grayscale(100%) !important;
+    border: 2px solid red;
 }
 
 .cpu-defeated {
-    /* border: 2px solid red; */
-    filter: grayscale(100%) !important;
+    filter: grayscale(100%);
 }
 
 .chars-thumb-p1-clicked {
