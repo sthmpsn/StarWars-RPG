@@ -16,6 +16,10 @@ html {
     clear: both;
 }
 
+.borderShape {
+    border-radius: 15px 15px 15px 15px;
+}
+
 .container {
     height: auto;
     min-width: 1714px;
@@ -96,10 +100,12 @@ html {
 #shipsBox {
     grid-column: 1 / 2;
     background-color: black;
+    margin-left: 20px;
 }
 
 .ships {
     height: 75px;
+    padding: 10px;
 }
 
 #bttn-p1 {
@@ -121,6 +127,11 @@ html {
     background-color: black;
     padding: 10px 10px;
     margin: 20px;
+}
+
+.matchupRow {
+    display: grid;
+    grid-template-columns: auto auto 1fr 2fr 1fr 1fr;
 }
 
 .matchupBox img {
@@ -200,7 +211,7 @@ html {
     color: white;
     padding: 20px 20px;
     margin: 0 0 20px 20px;
-    border-radius: 15px 15px 15px 15px;
+    /* border-radius: 15px 15px 15px 15px; */
     line-height: 1.5em;
     overflow-y: auto;
 }
