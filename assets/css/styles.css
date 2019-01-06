@@ -29,10 +29,6 @@ html {
     background-size: cover;    /* cover the full screen with the image */
 }
 
-.row {
-    border: 1px solid black;
-}
-
 .charLogoRow {
     display: grid;
     grid-template-columns: auto auto 1fr 2fr 1fr .45fr;
@@ -78,11 +74,22 @@ html {
 
 .player-select-row {
     display: grid;
-    grid-template-columns: auto 1fr 1fr 1fr 1fr .45fr;
+    grid-template-columns: 512px 1fr 1fr 1fr 1fr 1fr;
+}
+
+#player-select-warn {
+    grid-column: 1;
+    width: 500px;
+    margin: 10px 20px;
+    padding: 5px 0;
+    border-radius: 15px;
+    font-size: 36px;
+    text-align: center;
+    white-space: pre;
 }
 
 .bttn-player-select {
-    grid-column: 2;
+    grid-column: 1;
     width: 180px;
     height: 75px;
     background-color: black;
@@ -94,9 +101,9 @@ html {
 }
 
 #shipsBox {
-    grid-column: 1 / 2;
+    grid-column: 1;
     background-color: black;
-    margin-left: 20px;
+    border-radius: 0 50px 50px 0;
 }
 
 .ships {
@@ -246,19 +253,26 @@ html {
     border: 2px solid red;
 }
 
-.warning {
+/* .warningBox {
     width: 500px;
     margin: 10px 20px;
     padding: 5px 0;
     border-radius: 15px;
-    background-color: lightyellow;
     font-size: 36px;
     text-align: center;
     white-space: pre;
+} */
+
+.warning {
+    background-color: lightyellow;
 }
 
 .winner {
     background-color: lightgreen;
+}
+
+.loser {
+    background-color: lightcoral;
 }
 
 .p1Name {

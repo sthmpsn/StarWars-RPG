@@ -10,7 +10,6 @@ $(document).ready(function(){
         this.cap = cap;    // Counter Attack Points
         this.strength = strength;       // description info
         this.weakness = weakness;      // description info 
-        this.isSelected = false;      // set to true if P1 or CPU fighter
         this.isDefeated = false;      // if true will trigger a CounterAttack
     }
 
@@ -95,12 +94,16 @@ $(document).ready(function(){
     var p1 = "";
     var cpu = "";
     var p1NewAP = 0;  // holder for accumulative p1 AP  (XP gained)
+    var isGameOver = false;
 
 
     // Get Elements in the DOM
     var $charContainerEl = $('#char-container');
     var $charContainerUsedEl = $('#char-container-used');
-    var $playerSelectEl = $('#player-select-warn');
+    var $playerSelectWarnEl = $('#player-select-warn');
+    var $cpuBttnEl = $('#bttn-cpu');
+    var $replayBttnEl = $('#bttn-replay');
+    var $shipsBoxEl = $('#shipsBox');
     var $p1MatchupEl = $('#p1Matchup');
     var $cpuMatchupEl = $('#cpuMatchup');
     var $p1HpEl = $('#p1Hp');
@@ -127,7 +130,7 @@ $(document).ready(function(){
                 $charContainerUsedEl.append('<img id="p1-charSelected" class="chars-thumb" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>');
             }
             else if (fighter.name === cpu.name){
-                if (cpu.isDefeated !== true){
+                if (!cpu.isDefeated){
                     $charContainerUsedEl.append('<img id="cpu-charSelected" class="chars-thumb" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
                 }
                 else{
@@ -149,12 +152,11 @@ $(document).ready(function(){
             p1SelectedVal = charObj.attr("value");
             console.log("p1SelectedVal: " + p1SelectedVal);
         }
-        else{
-            if (cpu === ""){
-                charObj.attr("class", 'chars-thumb chars-thumb-cpu-clicked');
-                cpuSelectedVal = charObj.attr("value");
-                console.log("cpuSelectedVal: " + cpuSelectedVal);
-            }
+        else{ 
+            // Set the CPU player
+            charObj.attr("class", 'chars-thumb chars-thumb-cpu-clicked');
+            cpuSelectedVal = charObj.attr("value");
+            console.log("cpuSelectedVal: " + cpuSelectedVal);
         }
     }
 
@@ -183,10 +185,12 @@ $(document).ready(function(){
             }
             else{
                 //cpu defeated
+                console.log("CPU Char was defeated");
+                $shipsBoxEl.hide();
                 cpu.isDefeated = true;
                 $cpuHpEl.text(' X');
                 $('#battle-console').prepend('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>DEFEATED <span class="cpuName">' + cpu.name + ' </span><br>');
-                $('#shipsBox').hide();
+
             }
 
         }
@@ -208,29 +212,32 @@ $(document).ready(function(){
                     p1.isDefeated = true;   // Dead and Game Over
                     $p1HpEl.text(' X');
                     $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>DEFEATED <span class="p1Name">' + p1.name + ' </span><br>');
-                    $('#shipsBox').hide();
-                    $('#bttn-cpu').hide();
-                    $('#bttn-replay').show();
                     $('#p1-charSelected, #p1Matchup').attr("class",'char-defeated');
+                    $shipsBoxEl.hide();
+                    $cpuBttnEl.hide();
+                    $replayBttnEl.show();
+                    $playerSelectWarnEl.show();
+                    $playerSelectWarnEl.text('You Lose!!!');
+                    $playerSelectWarnEl.attr("class",'warning loser');
                     gameOver();
                 }
 
             }
             else{
                 //defeated and ensure that damage is not done to P1 on this turn
-                if (!(availableFighters.length === 0)){
-                    $('#bttn-cpu').show();  //to select a new opponent
-                    $('#shipsBox').hide();
+                    $cpuBttnEl.show();  //to select a new opponent
+                    $shipsBoxEl.hide();
                     $('#cpu-charSelected, #cpuMatchup').attr("class",'char-defeated');
                     cpu = "";
                     loadUsedFighters();
                     loadAvailFighters();
                     $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu'); // switch hover to red since CPU select turn
-                }
-                else{
-                    $playerSelectEl.text('Battle already in progress\n Complete the battle first');
-                    $playerSelectEl.attr("class",'warning winner');
-                    $playerSelectEl.show();
+                if (availableFighters.length === 0){   //If no more opponents then you Win!!
+                    $cpuBttnEl.hide();  //no more opponents to select
+                    $replayBttnEl.show();
+                    $playerSelectWarnEl.show();
+                    $playerSelectWarnEl.text('You Win!!!');
+                    $playerSelectWarnEl.attr("class",'warning winner');
                     gameOver();
                 }
             }
@@ -240,32 +247,32 @@ $(document).ready(function(){
         function gameOver() {
             $('#attackBttn').text("Game \n Over");
             $('#attackBttn').attr("class",'gameOver');
-
+            isGameOver = true;
          }
 
 
 
-// Load Game Environment
-    loadAvailFighters();
-    $charContainerUsedEl.hide();
-    $playerSelectEl.hide();
-    $('#bttn-cpu').hide();
-    $('#bttn-replay').hide();
-    $('#shipsBox').hide();
+
 
 
 
 // Listening to Click Events 
 
     $(document).on("click", '.chars-thumb', function(){
+        // if Player 1 and CPU are not defined then run the selectPlayer function
         if (p1 === "" || cpu === ""){
             selectPlayer($(this));
         }
         else{
-            $playerSelectEl.show();
-            $('#shipsBox').hide();
-            $playerSelectEl.text('Battle already in progress\n Complete the battle first');
-            $playerSelectEl.attr("class",'warning');
+        // if Player 1 and CPU are already selected and another char is clicked then do the following
+        // Check is game is over, if so then do nothing, else do the following
+            if (!isGameOver){
+                $shipsBoxEl.hide();
+                $playerSelectWarnEl.show();
+                $playerSelectWarnEl.text('Battle already in progress\n Complete the battle first');
+                $playerSelectWarnEl.attr("class",'warning');
+            }
+            // Do nothing (don't display the battle is in progress msg)
         }
 
     });
@@ -274,9 +281,7 @@ $(document).ready(function(){
         console.log("Player Button was clicked");
         if ($('.chars-thumb-p1-clicked')[0] && p1 === ""){
             p1 = moveCharToUsedArray(p1SelectedVal);
-            p1.isSelected = true;
             p1NewAP = p1.ap;
-
             console.log('Player 1: ' + p1.name);
             loadAvailFighters();
             loadUsedFighters();
@@ -288,9 +293,8 @@ $(document).ready(function(){
                 "alt": p1.name  
             });
             $p1HpEl.text(p1.hp);
-
             $('#bttn-p1').hide();
-            $('#bttn-cpu').show();  // need to decide if only want to show one button at time
+            $cpuBttnEl.show();  
             $('#battle-console').prepend('<span class="attackActivity">Player 1 Chose <span class="p1Name">' + p1.name + ' </span></span><br>');
             $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu'); // switch hover to red since CPU select turn
         }
@@ -299,41 +303,50 @@ $(document).ready(function(){
     $(document).on("click", '#bttn-cpu', function(){
         console.log("CPU Button was clicked");
         cpu = moveCharToUsedArray(cpuSelectedVal);
-        cpu.isSelected = true;   //use for later logic after defeated
-        console.log('Current Selected: ' + cpuSelectedVal);
         console.log('CPU: ' + cpu.name);
         loadAvailFighters();
         loadUsedFighters();
-        $('.chars-thumb').attr("class", 'chars-thumb'); 
+        $('.chars-thumb').attr("class", 'chars-thumb'); // clears the chars-thumb-cpu class so hover effect disabled
         $cpuMatchupEl.attr({
             "src": 'assets/images/' + cpu.imageName,
             "alt": cpu.name
         });
         $cpuHpEl.text(cpu.hp);
-        $('#bttn-cpu').hide();
-        $('#shipsBox').show();
+        $cpuBttnEl.hide();
+        $shipsBoxEl.show();
         $cpuMatchupEl.attr("class",'');  //clear grayscale if applied
         $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>is your opponent</span><br>');
         if (availableFighters.length < 1){
-            $charContainerEl.hide();
+            $charContainerEl.hide();  // hide the availableFighters div if there are no more fighters to select
         }
     });
 
     $(document).on("click", '#attackBttn', function(){
-        if (!(p1 === "" || cpu === "" || p1.isDefeated)){
+        if (!(p1 === "" || cpu === "" || p1.isDefeated || cpu.isDefeated)){
+            //hide ships and any prior warnings before calling the battleAction function or will not get the desired result
+            $playerSelectWarnEl.hide();
+            $shipsBoxEl.show();
             battleAction(p1);
             battleAction(cpu); 
         }
-        if ($('#player-select-warn').is(":visible")){   // If the Player warning is visible then hide it at this time and show Ships
-            $playerSelectEl.hide();
-            $('#shipsBox').show();
+        else {
+            console.log("This should hide the SHIPS box")
+            $shipsBoxEl.hide();
         }
     });
 
     // Reload/Restart page when Game Over
-    $('#bttn-replay').click(function(){
+    $replayBttnEl.click(function(){
         location.reload();
     });
+
+
+    // Load Game Environment
+    loadAvailFighters();
+    $charContainerUsedEl.hide();
+    $cpuBttnEl.hide();
+    $replayBttnEl.hide();
+    $shipsBoxEl.hide();
 
 
 
