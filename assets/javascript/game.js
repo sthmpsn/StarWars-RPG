@@ -59,7 +59,7 @@ $(document).ready(function(){
         'Storm Trooper',
         'stormTrooper.jpg',
         100,
-        1,
+        20,
         0,
         'Travel in packs' ,
         'Blaster aim'
@@ -131,11 +131,11 @@ $(document).ready(function(){
                     $charContainerUsedEl.append('<img id="cpu-charSelected" class="chars-thumb" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
                 }
                 else{
-                    $charContainerUsedEl.append('<img id="cpu-charSelected" class="chars-thumb cpu-defeated" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
+                    $charContainerUsedEl.append('<img id="cpu-charSelected" class="chars-thumb char-defeated" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
                 }
             }
             else {
-                $charContainerUsedEl.append('<img class="cpu-defeated" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
+                $charContainerUsedEl.append('<img class="char-defeated" src="assets/images/' + fighter.imageName + '" value="' + fighter.name + '" alt="' + fighter.name + '" title=\'Name: ' + fighter.name + '&#013;HP: ' + fighter.hp + '&#013;Strength: ' + fighter.strength + '&#013;Weakness: ' + fighter.weakness +  '&#013;\'/>'); 
             }
         });
     }
@@ -186,6 +186,7 @@ $(document).ready(function(){
                 cpu.isDefeated = true;
                 $cpuHpEl.text(' X');
                 $('#battle-console').prepend('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>DEFEATED <span class="cpuName">' + cpu.name + ' </span><br>');
+                $('#shipsBox').hide();
             }
 
         }
@@ -238,6 +239,7 @@ $(document).ready(function(){
 // Load Game Environment
     loadAvailFighters();
     $charContainerUsedEl.hide();
+    $playerSelectEl.hide();
     $('#bttn-cpu').hide();
     $('#bttn-replay').hide();
     $('#shipsBox').hide();
@@ -251,9 +253,12 @@ $(document).ready(function(){
             selectPlayer($(this));
         }
         else{
+            $playerSelectEl.show();
+            $('#shipsBox').hide();
             $playerSelectEl.text('Battle already in progress\n Complete the battle first');
             $playerSelectEl.attr("class",'warning');
         }
+
     });
     
     $(document).on("click", '#bttn-p1', function(){
@@ -306,10 +311,13 @@ $(document).ready(function(){
     });
 
     $(document).on("click", '#attackBttn', function(){
-        $playerSelectEl.hide();
         if (!(p1 === "" || cpu === "" || p1.isDefeated)){
             battleAction(p1);
             battleAction(cpu); 
+        }
+        if ($('#player-select-warn').is(":visible")){   // If the Player warning is visible then hide it at this time and show Ships
+            $playerSelectEl.hide();
+            $('#shipsBox').show();
         }
     });
 
