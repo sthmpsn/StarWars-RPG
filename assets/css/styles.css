@@ -31,7 +31,7 @@ html {
 
 .charLogoRow {
     display: grid;
-    grid-template-columns: auto auto 1fr 2fr 1fr .45fr;
+    grid-template-columns: auto auto 1fr 1fr 300px 80px;
 }
 
 .char-area {
@@ -252,16 +252,6 @@ html {
 .chars-thumb-cpu-clicked {
     border: 2px solid red;
 }
-
-/* .warningBox {
-    width: 500px;
-    margin: 10px 20px;
-    padding: 5px 0;
-    border-radius: 15px;
-    font-size: 36px;
-    text-align: center;
-    white-space: pre;
-} */
 
 .warning {
     background-color: lightyellow;
