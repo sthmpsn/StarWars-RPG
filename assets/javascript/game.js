@@ -182,7 +182,7 @@ $(document).ready(function(){
                 $('#battle-console').prepend('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>attacked <span class="cpuName">' + cpu.name + ' </span>for </span><span class="damage">' + p1NewAP + ' damage</span><br>');
             }
             else{
-                //defeated
+                //cpu defeated
                 cpu.isDefeated = true;
                 $cpuHpEl.text(' X');
                 $('#battle-console').prepend('<span class="attackActivity"><span class="p1Name">' + p1.name + ' </span>DEFEATED <span class="cpuName">' + cpu.name + ' </span><br>');
@@ -200,17 +200,34 @@ $(document).ready(function(){
                 else{
                     $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>counter attacked <span class="p1Name">' + p1.name + ' </span>for </span><span class="damage">' + cpu.cap + ' damage</span><br>');
                 }
-                $p1HpEl.text(p1.hp);
+                if (p1.hp > 0){
+                    $p1HpEl.text(p1.hp);  // Still alive
+                }
+                else{
+                    p1.isDefeated = true;   // Dead and Game Over
+                    $p1HpEl.text(' X');
+                    $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>DEFEATED <span class="p1Name">' + p1.name + ' </span><br>');
+                    $('#shipsBox').hide();
+                    $('#bttn-cpu').hide();
+                    $('#bttn-replay').show();
+                    $('#p1-charSelected, #p1Matchup').attr("class",'char-defeated');
+                    // $playerSelectEl.text('You were defeated, GAME OVER\n Press "RESET" to play again');
+                    // $playerSelectEl.attr("class",'warning');
+                    $('#attackBttn').text("Game \n Over");
+                    $('#attackBttn').attr("class",'gameOver');
+                }
+
             }
             else{
-                //defeated
+                //defeated and ensure that damage is not done to P1 on this turn
                 $('#bttn-cpu').show();  //to select a new opponent
                 $('#shipsBox').hide();
-                $('#cpu-charSelected, #cpuMatchup').attr("class",'cpu-defeated');
+                $('#cpu-charSelected, #cpuMatchup').attr("class",'char-defeated');
                 cpu = "";
                 loadUsedFighters();
                 loadAvailFighters();
                 $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu'); // switch hover to red since CPU select turn
+
             }
         }
     }
@@ -283,12 +300,14 @@ $(document).ready(function(){
         $('#shipsBox').show();
         $cpuMatchupEl.attr("class",'');  //clear grayscale if applied
         $('#battle-console').prepend('<span class="attackActivity"><span class="cpuName">' + cpu.name + ' </span>is your opponent</span><br>');
-
+        if (availableFighters.length < 1){
+            $charContainerEl.hide();
+        }
     });
 
     $(document).on("click", '#attackBttn', function(){
         $playerSelectEl.hide();
-        if (!(p1 === "" || cpu === "")){
+        if (!(p1 === "" || cpu === "" || p1.isDefeated)){
             battleAction(p1);
             battleAction(cpu); 
         }

@@ -185,6 +185,7 @@ html {
     color: white;
     text-align: center;
     font-size: 1.3em;
+    white-space: pre;
 }
 
 #cpuMatchup {
@@ -230,7 +231,7 @@ html {
     border: 2px solid red;
 }
 
-.cpu-defeated {
+.char-defeated {
     filter: grayscale(100%);
     width: 50px;
     height: 140px;
@@ -274,4 +275,8 @@ html {
 
 .damage {
     color: orange;
+}
+
+.gameOver {
+    filter: grayscale(100%);
 }
