@@ -212,27 +212,36 @@ $(document).ready(function(){
                     $('#bttn-cpu').hide();
                     $('#bttn-replay').show();
                     $('#p1-charSelected, #p1Matchup').attr("class",'char-defeated');
-                    // $playerSelectEl.text('You were defeated, GAME OVER\n Press "RESET" to play again');
-                    // $playerSelectEl.attr("class",'warning');
-                    $('#attackBttn').text("Game \n Over");
-                    $('#attackBttn').attr("class",'gameOver');
+                    gameOver();
                 }
 
             }
             else{
                 //defeated and ensure that damage is not done to P1 on this turn
-                $('#bttn-cpu').show();  //to select a new opponent
-                $('#shipsBox').hide();
-                $('#cpu-charSelected, #cpuMatchup').attr("class",'char-defeated');
-                cpu = "";
-                loadUsedFighters();
-                loadAvailFighters();
-                $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu'); // switch hover to red since CPU select turn
-
+                if (!(availableFighters.length === 0)){
+                    $('#bttn-cpu').show();  //to select a new opponent
+                    $('#shipsBox').hide();
+                    $('#cpu-charSelected, #cpuMatchup').attr("class",'char-defeated');
+                    cpu = "";
+                    loadUsedFighters();
+                    loadAvailFighters();
+                    $('.chars-thumb').attr("class", 'chars-thumb chars-thumb-cpu'); // switch hover to red since CPU select turn
+                }
+                else{
+                    $playerSelectEl.text('Battle already in progress\n Complete the battle first');
+                    $playerSelectEl.attr("class",'warning winner');
+                    $playerSelectEl.show();
+                    gameOver();
+                }
             }
         }
     }
 
+        function gameOver() {
+            $('#attackBttn').text("Game \n Over");
+            $('#attackBttn').attr("class",'gameOver');
+
+         }
 
 
 

@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    min-width: 700px;
 }
 
 html { 
@@ -30,11 +31,6 @@ html {
 
 .row {
     border: 1px solid black;
-}
-
-.col {
-    border: 1px dashed blue;
-    width: 550px;
 }
 
 .charLogoRow {
@@ -259,6 +255,10 @@ html {
     font-size: 36px;
     text-align: center;
     white-space: pre;
+}
+
+.winner {
+    background-color: lightgreen;
 }
 
 .p1Name {
