@@ -88,6 +88,7 @@ $(document).ready(function(){
 
     // Defining Variables
     var availableFighters = [kyloRen, lukeSkywalker, darthMaul, quigon, stormTrooper, darthVader, yoda];
+    var matchupSounds = ["fear.mp3", "jabba.mp3", "masterApprentice.mp3", "r2.mp3", "saberup.wav", "wellTrained.mp3", "comeBack.mp3"];
     var usedFighters = [];
     var p1SelectedVal = "";
     var cpuSelectedVal = "";
@@ -95,6 +96,7 @@ $(document).ready(function(){
     var cpu = "";
     var p1NewAP = 0;  // holder for accumulative p1 AP  (XP gained)
     var isGameOver = false;
+    var sound = "";
 
 
     // Get Elements in the DOM
@@ -219,6 +221,8 @@ $(document).ready(function(){
                     $playerSelectWarnEl.show();
                     $playerSelectWarnEl.text('You Lose!!!');
                     $playerSelectWarnEl.attr("class",'warning loser');
+                    sound = "lose";
+                    playSound(sound);
                     gameOver();
                 }
 
@@ -238,11 +242,29 @@ $(document).ready(function(){
                     $playerSelectWarnEl.show();
                     $playerSelectWarnEl.text('You Win!!!');
                     $playerSelectWarnEl.attr("class",'warning winner');
+                    sound = "win";
+                    playSound(sound);
                     gameOver();
                 }
             }
         }
     }
+
+        function playSound(sound){
+            var audio = undefined;
+
+           if (sound === "lose"){
+                audio = new Audio('assets/sounds/lose.mp3');
+           }
+           else if (sound === "win"){
+                audio = new Audio('assets/sounds/win.mp3');
+           }
+           else{
+                var randSound = Math.floor(Math.random() * (matchupSounds.length -1));
+                audio = new Audio('assets/sounds/'+ matchupSounds[randSound]);
+           }
+            audio.play();
+        }
 
         function gameOver() {
             $('#attackBttn').text("Game \n Over");
@@ -301,6 +323,7 @@ $(document).ready(function(){
     });
 
     $(document).on("click", '#bttn-cpu', function(){
+        playSound("matchup");
         console.log("CPU Button was clicked");
         cpu = moveCharToUsedArray(cpuSelectedVal);
         console.log('CPU: ' + cpu.name);
@@ -319,6 +342,7 @@ $(document).ready(function(){
         if (availableFighters.length < 1){
             $charContainerEl.hide();  // hide the availableFighters div if there are no more fighters to select
         }
+        
     });
 
     $(document).on("click", '#attackBttn', function(){
